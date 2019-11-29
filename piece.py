@@ -31,6 +31,9 @@ class Piece:
     def icon(self, new_icon):
         self._icon = new_icon
 
+    def change_color(self):
+        self._color = "w" if self._color == "b" else "b"
+
 
 class Pawn(Piece):
     def __init__(self, color):
