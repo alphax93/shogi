@@ -51,6 +51,28 @@ while True:
             b.clear_pos(x, y)
             b.move_piece(selected_piece, int(answer[1]), int(answer[4]))
 
+            if turn == "w" and not selected_piece.promoted:
+                if ((selected_piece.icon == "P" or selected_piece.icon == "L") and int(answer[1]) == 8) or (selected_piece.icon == "N" and int(answer[1]) >= 7):
+                    selected_piece.promote()
+                elif int(answer[1]) >= 6:
+                    question = [inquirer.List("promote",
+                                              f"Do you want to promote {selected_piece}",
+                                              ["Yes", "No"])]
+                    answer = inquirer.prompt(question)["promote"]
+                    if answer == "Yes":
+                        selected_piece.promote()
+
+            elif turn == "b" and not selected_piece.promoted:
+                if ((selected_piece.icon == "P" or selected_piece.icon == "L") and int(answer[1]) == 0) or (selected_piece.icon == "N" and int(answer[1]) <= 1):
+                    selected_piece.promote()
+                elif int(answer[1]) >= 2:
+                    question = [inquirer.List("promote",
+                                              f"Do you want to promote {selected_piece}",
+                                              ["Yes", "No"])]
+                    answer = inquirer.prompt(question)["promote"]
+                    if answer == "Yes":
+                        selected_piece.promote()
+
         except Exception as e:
             print(f"\033[91m{e}\033[00m")
             continue
@@ -86,11 +108,6 @@ while True:
             b.white_captured.remove(selected_piece)
         else:
             b.black_captured.remove(selected_piece)
-
-    if turn == "w" and int(answer[1]) >= 6 and not selected_piece.promoted:
-        selected_piece.promote()
-    if turn == "b" and int(answer[1]) <= 2 and not selected_piece.promoted:
-        selected_piece.promote()
 
     turn = "w" if turn == "b" else "b"
     turn_count += 1

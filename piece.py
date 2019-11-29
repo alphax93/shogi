@@ -19,6 +19,10 @@ class Piece:
     def promote(self):
         pass
 
+    @abstractmethod
+    def unpromote(self):
+        pass
+
     @property
     def color(self):
         return self._color
@@ -52,6 +56,10 @@ class Pawn(Piece):
         self.promoted = True
         self.icon = "+P"
 
+    def unpromote(self):
+        self.promoted = False
+        self.icon = "P"
+
 
 class King(Piece):
     def __init__(self, color):
@@ -70,6 +78,9 @@ class King(Piece):
         return [pos for pos in result if "-" not in pos and "9" not in pos]
 
     def promote(self):
+        pass
+
+    def unpromote(self):
         pass
 
 
@@ -95,6 +106,10 @@ class Rook(Piece):
         self.promoted = True
         self.icon = "+R"
 
+    def unpromote(self):
+        self.promoted = False
+        self.icon = "R"
+
 
 class Bishop(Piece):
     def __init__(self, color):
@@ -118,6 +133,10 @@ class Bishop(Piece):
         self.promoted = True
         self.icon = "+B"
 
+    def unpromote(self):
+        self.promoted = False
+        self.icon = "B"
+
 
 class GoldGeneral(Piece):
     def __init__(self, color):
@@ -127,6 +146,9 @@ class GoldGeneral(Piece):
         return _gold_move(row, col, self.color)
 
     def promote(self):
+        pass
+
+    def unpromote(self):
         pass
 
 
@@ -157,6 +179,10 @@ class SilverGeneral(Piece):
         self.promoted = True
         self.icon = "+S"
 
+    def unpromote(self):
+        self.promoted = False
+        self.icon = "S"
+
 
 class Knight(Piece):
     def __init__(self, color):
@@ -179,6 +205,10 @@ class Knight(Piece):
         self.promoted = True
         self.icon = "+N"
 
+    def unpromote(self):
+        self.promoted = False
+        self.icon = "N"
+
 
 class Lance(Piece):
     def __init__(self, color):
@@ -196,6 +226,10 @@ class Lance(Piece):
     def promote(self):
         self.promoted = True
         self.icon = "+L"
+
+    def unpromote(self):
+        self.promoted = False
+        self.icon = "L"
 
 
 def _gold_move(row, col, color):

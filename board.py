@@ -114,6 +114,7 @@ class Board:
             return options
 
     def place_piece(self, piece, row, col):
+        piece.unpromote()
         self._board[row][col] = piece
         self.free_places.remove(f"({row}, {col})")
 
